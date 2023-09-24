@@ -1,47 +1,49 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-    }
-    static Scanner sc=new Scanner(System.in);
-
-
-    public static void ATakeName(){
-        String name=sc.nextLine();
-
+        a();
     }
 
-    public static boolean BCheckNameAndTakeGender(String name){
-        String gender=sc.nextLine();
+    public static void a(){
+        try{
+            b();
+        }catch (Exception e){
+            System.out.println("Catch exception that came from b");
+            System.out.println(e.getMessage());
+        }
 
-
-
-        return "a";
     }
 
-    public static String CTakeTckNo(){
-        Scanner sc=new Scanner(System.in);
-        String tckNo=sc.nextLine();
+    public static void b() throws TckNoDoesNotProperForm {
         try {
-            if(DCheckTckNo(tckNo)){
-                System.out.println("Proper form");
-            }
-        } catch (TckNoDoesNotProperForm e) {
-            throw new RuntimeException(e);
+            c();
+        }catch (Exception e){
+            System.out.println("Catched exception that came from c");
+            System.out.println("Throwed exception from b");
+            throw new NullPointerException("TckNo null geldiği için gerekli işlem yapılamadı");
         }
+    }
 
+    public static void c() throws TckNoDoesNotProperForm {
+
+       try{
+           d();
+       }catch (Exception e){
+           System.out.println("Catched exception that came from d");
+           System.out.println("Throwed exception from c");
+           throw e;
+       }
 
     }
 
-    public static boolean DCheckTckNo(String tckNo) throws TckNoDoesNotProperForm {
+    public static void d() throws TckNoDoesNotProperForm {
+        String tckNo="1111111111";
         if(tckNo.length()!=11){
+            System.out.println("Throwed exception from d");
             throw new TckNoDoesNotProperForm("TckNo does not proper form,tckno must be 11 character");
-        }else{
-            return true;
         }
-
-
     }
 }
 
